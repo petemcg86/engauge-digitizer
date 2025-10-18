@@ -21,7 +21,6 @@ DlgAbout::DlgAbout (MainWindow &mainWindow) :
   setText (QString ("<p>%1 %2 %3</p> <p>&copy; Mark Mitchell and others</p><p>%4</p><p>%5</p><p>%6</p><p>%7</p><p>%8:</p>"
                     "<ul>"
                      "<li><a href=\"https://github.com/akhuettel/engauge-digitizer\">%9</a></li>"
-                     "<li><a href=\"https://gitter.im/markummitchell/engauge-digitizer\">%10</a></li>"
                     "</ul>")
            .arg (tr ("Engauge Digitizer"))
            .arg (tr ("Version"))
