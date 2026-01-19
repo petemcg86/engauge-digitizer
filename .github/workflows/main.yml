@@ -11,12 +11,7 @@ jobs:
     - name: Checkout source
       uses: actions/checkout@v4
 
-    - name: Install MinGW
-      uses: egor-tensin/setup-mingw@v2
-      with:
-        platform: x64
-
-    - name: Install Qt
+    - name: Install Qt (with MinGW)
       uses: jurplel/install-qt-action@v4
       with:
         version: 6.5.3
