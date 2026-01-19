@@ -21,10 +21,12 @@ jobs:
         cache: true
 
     - name: Configure CMake
-      run: |
-        mkdir build
-        cd build
-        cmake .. -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release
+  run: |
+    if (Test-Path build) { Remove-Item build -Recurse -Force }
+    mkdir build
+    cd build
+    cmake .. -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release
+
 
     - name: Build
       run: |
