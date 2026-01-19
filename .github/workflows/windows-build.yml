@@ -1,0 +1,48 @@
+name: Windows Build
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout source
+      uses: actions/checkout@v4
+
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v4
+      with:
+        version: 6.5.3
+        arch: win64_mingw
+        cache: true
+
+    - name: Configure CMake
+      run: |
+        mkdir build
+        cd build
+        cmake .. -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release
+
+    - name: Build
+      run: |
+        cd build
+        mingw32-make -j2
+
+    - name: Deploy Qt
+      run: |
+        cd build/src
+        windeployqt engauge.exe
+
+    - name: Package
+      run: |
+        mkdir engauge-win64
+        xcopy build\src\* engauge-win64\ /E /I
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: engauge-windows
+        path: engauge-win64
